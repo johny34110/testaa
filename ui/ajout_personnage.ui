@@ -8,163 +8,87 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="formLayout">
+
+     <!-- Nom -->
      <item row="0" column="0">
       <widget class="QLabel" name="labelNom">
-       <property name="text">
-        <string>Nom :</string>
-       </property>
+       <property name="text"><string>Nom :</string></property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="0" column="1" colspan="2">
       <widget class="QLineEdit" name="lineEditNom"/>
      </item>
+
+     <!-- Niveau -->
      <item row="1" column="0">
       <widget class="QLabel" name="labelNiveau">
-       <property name="text">
-        <string>Niveau :</string>
-       </property>
+       <property name="text"><string>Niveau :</string></property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="1" column="1" colspan="2">
       <widget class="QSpinBox" name="spinBoxNiveau">
-       <property name="minimum">
-        <number>1</number>
-       </property>
-       <property name="maximum">
-        <number>100</number>
-       </property>
+       <property name="minimum"><number>1</number></property>
+       <property name="maximum"><number>100</number></property>
       </widget>
      </item>
 
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelPV">
-       <property name="text">
-        <string>PV :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QSpinBox" name="spinBoxPVBase"/>
-     </item>
-     <item row="2" column="2">
-      <widget class="QSpinBox" name="spinBoxPVBonus"/>
-     </item>
-    
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelAttaque">
-       <property name="text">
-        <string>Attaque :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="spinBoxAttaqueBase"/>
-     </item>
-     <item row="3" column="2">
-      <widget class="QSpinBox" name="spinBoxAttaqueBonus"/>
-     </item>
-    
-     <item row="4" column="0">
-      <widget class="QLabel" name="labelDéfense">
-       <property name="text">
-        <string>Défense :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QSpinBox" name="spinBoxDéfenseBase"/>
-     </item>
-     <item row="4" column="2">
-      <widget class="QSpinBox" name="spinBoxDéfenseBonus"/>
-     </item>
-    
-     <item row="5" column="0">
-      <widget class="QLabel" name="labelVitesse">
-       <property name="text">
-        <string>Vitesse :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QSpinBox" name="spinBoxVitesseBase"/>
-     </item>
-     <item row="5" column="2">
-      <widget class="QSpinBox" name="spinBoxVitesseBonus"/>
-     </item>
-    
-     <item row="6" column="0">
-      <widget class="QLabel" name="labelTauxcrit">
-       <property name="text">
-        <string>Taux crit :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QSpinBox" name="spinBoxTauxcritBase"/>
-     </item>
-     <item row="6" column="2">
-      <widget class="QSpinBox" name="spinBoxTauxcritBonus"/>
-     </item>
-    
-     <item row="7" column="0">
-      <widget class="QLabel" name="labelDégâtscrit">
-       <property name="text">
-        <string>Dégâts crit :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="1">
-      <widget class="QSpinBox" name="spinBoxDégâtscritBase"/>
-     </item>
-     <item row="7" column="2">
-      <widget class="QSpinBox" name="spinBoxDégâtscritBonus"/>
-     </item>
-    
-     <item row="8" column="0">
-      <widget class="QLabel" name="labelRésistance">
-       <property name="text">
-        <string>Résistance :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1">
-      <widget class="QSpinBox" name="spinBoxRésistanceBase"/>
-     </item>
-     <item row="8" column="2">
-      <widget class="QSpinBox" name="spinBoxRésistanceBonus"/>
-     </item>
-    
-     <item row="9" column="0">
-      <widget class="QLabel" name="labelPrécision">
-       <property name="text">
-        <string>Précision :</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <widget class="QSpinBox" name="spinBoxPrécisionBase"/>
-     </item>
-     <item row="9" column="2">
-      <widget class="QSpinBox" name="spinBoxPrécisionBonus"/>
-     </item>
-    
+     <!-- Génération des stats -->
+     <!-- Pour chaque : label + base + bonus -->
+     <!-- Toutes avec decimals = 1 -->
+
+     <!-- Exemple pour PV -->
+     <!-- Les lignes suivantes suivent le même modèle -->
+
+     <!-- PV -->
+     <item row="2" column="0"><widget class="QLabel" name="labelPV"><property name="text"><string>PV :</string></property></widget></item>
+     <item row="2" column="1"><widget class="QDoubleSpinBox" name="spinBoxPVBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="2" column="2"><widget class="QDoubleSpinBox" name="spinBoxPVBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+
+     <!-- Attaque -->
+     <item row="3" column="0"><widget class="QLabel" name="labelAttaque"><property name="text"><string>Attaque :</string></property></widget></item>
+     <item row="3" column="1"><widget class="QDoubleSpinBox" name="spinBoxAttaqueBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="3" column="2"><widget class="QDoubleSpinBox" name="spinBoxAttaqueBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+
+     <!-- Defense -->
+     <item row="4" column="0"><widget class="QLabel" name="labelDefense"><property name="text"><string>Defense :</string></property></widget></item>
+     <item row="4" column="1"><widget class="QDoubleSpinBox" name="spinBoxDefenseBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="4" column="2"><widget class="QDoubleSpinBox" name="spinBoxDefenseBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+
+     <!-- Vitesse -->
+     <item row="5" column="0"><widget class="QLabel" name="labelVitesse"><property name="text"><string>Vitesse :</string></property></widget></item>
+     <item row="5" column="1"><widget class="QDoubleSpinBox" name="spinBoxVitesseBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="5" column="2"><widget class="QDoubleSpinBox" name="spinBoxVitesseBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+
+     <!-- Taux Crit -->
+     <item row="6" column="0"><widget class="QLabel" name="labelTauxcrit"><property name="text"><string>Taux Crit :</string></property></widget></item>
+     <item row="6" column="1"><widget class="QDoubleSpinBox" name="spinBoxTauxcritBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="6" column="2"><widget class="QDoubleSpinBox" name="spinBoxTauxcritBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+
+     <!-- Degats Crit -->
+     <item row="7" column="0"><widget class="QLabel" name="labelDegatsCrit"><property name="text"><string>Degats Crit :</string></property></widget></item>
+     <item row="7" column="1"><widget class="QDoubleSpinBox" name="spinBoxDegatsCritBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="7" column="2"><widget class="QDoubleSpinBox" name="spinBoxDegatsCritBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+
+     <!-- Resistance -->
+     <item row="8" column="0"><widget class="QLabel" name="labelResistance"><property name="text"><string>Resistance :</string></property></widget></item>
+     <item row="8" column="1"><widget class="QDoubleSpinBox" name="spinBoxResistanceBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="8" column="2"><widget class="QDoubleSpinBox" name="spinBoxResistanceBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+
+     <!-- Precision -->
+     <item row="9" column="0"><widget class="QLabel" name="labelPrecision"><property name="text"><string>Precision :</string></property></widget></item>
+     <item row="9" column="1"><widget class="QDoubleSpinBox" name="spinBoxPrecisionBase"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
+     <item row="9" column="2"><widget class="QDoubleSpinBox" name="spinBoxPrecisionBonus"><property name="decimals"><number>1</number></property><property name="minimum"><double>0.0</double></property><property name="maximum"><double>1000000.0</double></property></widget></item>
     </layout>
    </item>
+
+   <!-- Boutons -->
    <item>
     <layout class="QHBoxLayout" name="buttonLayout">
      <item>
-      <widget class="QPushButton" name="buttonValider">
-       <property name="text">
-        <string>Valider</string>
-       </property>
-      </widget>
+      <widget class="QPushButton" name="buttonValider"><property name="text"><string>Valider</string></property></widget>
      </item>
      <item>
-      <widget class="QPushButton" name="buttonAnnuler">
-       <property name="text">
-        <string>Annuler</string>
-       </property>
-      </widget>
+      <widget class="QPushButton" name="buttonAnnuler"><property name="text"><string>Annuler</string></property></widget>
      </item>
     </layout>
    </item>

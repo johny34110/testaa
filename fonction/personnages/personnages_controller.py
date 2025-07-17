@@ -8,7 +8,6 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import Qt, QSortFilterProxyModel
 from .ajout_personnage import AjoutPersonnageDialog
 
-
 class PersonnagesController:
     def __init__(self, ui: QWidget, data_path: str):
         self.ui = ui
@@ -16,23 +15,24 @@ class PersonnagesController:
 
         # Modèle principal
         self.model = QStandardItemModel()
+        # Colonnes doivent correspondre aux clés JSON (sans accents)
         self.model.setHorizontalHeaderLabels([
-            "Nom", "Niveau", "PV", "Attaque", "Défense", "Vitesse",
-            "Taux crit", "Dégâts crit", "Résistance", "Précision"
+            "Nom", "Niveau", "PV", "Attaque", "Defense", "Vitesse",
+            "Taux crit", "Degats crit", "Resistance", "Precision"
         ])
 
-        # Proxy pour recherche
+        # Proxy pour la recherche
         self.proxy = QSortFilterProxyModel(self.ui)
         self.proxy.setSourceModel(self.model)
         self.proxy.setFilterKeyColumn(0)
         self.proxy.setFilterCaseSensitivity(Qt.CaseInsensitive)
 
-        # Table de personnages
+        # Configuration de la table
         self.ui.characterTable.setModel(self.proxy)
         self.ui.characterTable.setSortingEnabled(True)
         self.ui.characterTable.sortByColumn(0, Qt.AscendingOrder)
 
-        # Connexions
+        # Connexions boutons / recherche
         self.ui.addCharacterButton.clicked.connect(self.open_add_dialog)
         self.ui.searchBar.textChanged.connect(self.proxy.setFilterFixedString)
         self.enable_context_menu()
@@ -42,6 +42,7 @@ class PersonnagesController:
         self.currentPage = 1
         self._setup_pagination()
 
+        # Chargement initial
         self.load_characters()
         self.update_table()
 
@@ -73,33 +74,37 @@ class PersonnagesController:
             json.dump(self.all_characters, f, indent=2, ensure_ascii=False)
 
     def update_table(self):
+        # Vider les lignes existantes
         self.model.removeRows(0, self.model.rowCount())
+        # Filtrer par nom
         term = self.ui.searchBar.text().lower()
         filtered = [p for p in self.all_characters if term in p['nom'].lower()]
+        # Pagination
         pageSize = int(self.pageSizeCombo.currentText())
         pages = max(1, math.ceil(len(filtered) / pageSize))
         self.currentPage = min(self.currentPage, pages)
         start = (self.currentPage - 1) * pageSize
         for p in filtered[start:start + pageSize]:
             self._append_row(p)
-
+        # Mettre à jour l'affichage de la pagination
         self.ui.pageLabel.setText(f"Page {self.currentPage} / {pages}")
         self.ui.prevPageButton.setEnabled(self.currentPage > 1)
         self.ui.nextPageButton.setEnabled(self.currentPage < pages)
 
     def _append_row(self, data):
-        t = lambda s: s['base'] + s['bonus']
+        # calcule la stat totale
+        def total(stat): return stat['base'] + stat['bonus']
         row = [
             QStandardItem(data['nom']),
             QStandardItem(str(data['niveau'])),
-            QStandardItem(str(t(data['PV']))),
-            QStandardItem(str(t(data['Attaque']))),
-            QStandardItem(str(t(data['Défense']))),
-            QStandardItem(str(t(data['Vitesse']))),
-            QStandardItem(str(t(data['Taux crit']))),
-            QStandardItem(str(t(data['Dégâts crit']))),
-            QStandardItem(str(t(data['Résistance']))),
-            QStandardItem(str(t(data['Précision'])))
+            QStandardItem(str(total(data['PV']))),
+            QStandardItem(str(total(data['Attaque']))),
+            QStandardItem(str(total(data['Defense']))),
+            QStandardItem(str(total(data['Vitesse']))),
+            QStandardItem(str(total(data['Taux crit']))),
+            QStandardItem(str(total(data['Degats crit']))),
+            QStandardItem(str(total(data['Resistance']))),
+            QStandardItem(str(total(data['Precision'])))
         ]
         for item in row:
             item.setEditable(False)
@@ -129,6 +134,7 @@ class PersonnagesController:
             new = dlg.get_data()
             self.all_characters.append(new)
             self.save_characters()
+            # Aller à la dernière page
             self.currentPage = math.ceil(len(self.all_characters) / int(self.pageSizeCombo.currentText()))
             self.update_table()
 
@@ -137,10 +143,10 @@ class PersonnagesController:
         row = src.row()
         term = self.ui.searchBar.text().lower()
         filtered = [p for p in self.all_characters if term in p['nom'].lower()]
-        try:
-            actual = filtered[(self.currentPage - 1) * int(self.pageSizeCombo.currentText()) + row]
-        except IndexError:
+        idx = (self.currentPage - 1) * int(self.pageSizeCombo.currentText()) + row
+        if idx < 0 or idx >= len(filtered):
             return
+        actual = filtered[idx]
         dlg = AjoutPersonnageDialog(self.ui)
         dlg.remplir_champs(actual)
         if dlg.exec_():
@@ -157,16 +163,16 @@ class PersonnagesController:
         if not index.isValid():
             return
         menu = QMenu(self.ui)
-        mod = menu.addAction("Modifier")
-        suppr = menu.addAction("Supprimer")
+        mod_action = menu.addAction("Modifier")
+        del_action = menu.addAction("Supprimer")
         action = menu.exec_(self.ui.characterTable.viewport().mapToGlobal(pos))
-        if action == mod:
+        if action == mod_action:
             self.edit_character(index)
-        elif action == suppr:
+        elif action == del_action:
             src = self.proxy.mapToSource(index)
             row = src.row()
             nom = self.model.item(row, 0).text()
-            confirm = QMessageBox.question(self.ui, "Suppression", f"Supprimer « {nom} » ?", QMessageBox.Yes | QMessageBox.No)
+            confirm = QMessageBox.question(self.ui, "Suppression", f"Supprimer '{nom}' ?", QMessageBox.Yes | QMessageBox.No)
             if confirm == QMessageBox.Yes:
                 self.all_characters = [p for p in self.all_characters if p['nom'] != nom]
                 self.save_characters()

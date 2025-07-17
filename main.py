@@ -1,3 +1,6 @@
+import faulthandler
+faulthandler.enable()
+
 import sys
 import os
 from PyQt5 import uic
