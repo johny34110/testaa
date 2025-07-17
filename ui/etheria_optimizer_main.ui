@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QWidget" name="MainWindow">
+  <property name="windowTitle">
+   <string>Etheria Optimizer</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayoutMain">
+   <item>
+    <widget class="QListWidget" name="sidebar">
+     <property name="maximumWidth">
+      <number>150</number>
+     </property>
+     <item><property name="text"><string>Personnages</string></property></item>
+     <item><property name="text"><string>Modules</string></property></item>
+     <item><property name="text"><string>Builds</string></property></item>
+     <item><property name="text"><string>Export / Import</string></property></item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QStackedWidget" name="mainStack">
+     <property name="currentIndex"><number>0</number></property>
+
+     <!-- Onglet Personnages -->
+     <widget class="QWidget" name="tabCharacters">
+      <!-- Rempli dynamiquement -->
+     </widget>
+
+     <!-- Onglet Modules -->
+     <widget class="QWidget" name="tabModules">
+      <!-- Rempli dynamiquement par uic.loadUi(module_tab.ui, self.tabModules) -->
+     </widget>
+
+     <!-- Onglet Builds -->
+     <widget class="QWidget" name="tabBuilds">
+      <layout class="QVBoxLayout" name="layoutBuilds">
+       <item>
+        <widget class="QLabel" name="labelBuildsPlaceholder">
+         <property name="text"><string>Module d'optimisation à venir...</string></property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+
+     <!-- Onglet Export / Import -->
+     <widget class="QWidget" name="tabExport">
+      <layout class="QVBoxLayout" name="layoutExport">
+       <item>
+        <widget class="QLabel" name="labelExportPlaceholder">
+         <property name="text"><string>Options d'exportation et d'importation à venir...</string></property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

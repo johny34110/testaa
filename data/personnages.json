@@ -1,0 +1,38 @@
+[
+  {
+    "nom": "tiamat",
+    "niveau": 50,
+    "PV": {
+      "base": 17,
+      "bonus": 61
+    },
+    "Attaque": {
+      "base": 0,
+      "bonus": 0
+    },
+    "Défense": {
+      "base": 0,
+      "bonus": 0
+    },
+    "Vitesse": {
+      "base": 0,
+      "bonus": 0
+    },
+    "Taux crit": {
+      "base": 0,
+      "bonus": 0
+    },
+    "Dégâts crit": {
+      "base": 0,
+      "bonus": 0
+    },
+    "Résistance": {
+      "base": 0,
+      "bonus": 0
+    },
+    "Précision": {
+      "base": 0,
+      "bonus": 0
+    }
+  }
+]

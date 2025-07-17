@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TabCharacters</class>
+ <widget class="QWidget" name="TabCharacters">
+  <property name="windowTitle">
+   <string>Onglet Personnages</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayoutCharacters">
+   <item>
+    <layout class="QHBoxLayout" name="topBar">
+     <item>
+      <widget class="QPushButton" name="addCharacterButton">
+       <property name="text">
+        <string>Ajouter un personnage</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="searchBar">
+       <property name="placeholderText">
+        <string>Rechercher un personnage...</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableView" name="characterTable"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="paginationLayout">
+     <item>
+      <widget class="QPushButton" name="prevPageButton">
+       <property name="text">
+        <string>Précédent</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="pageLabel">
+       <property name="text">
+        <string>Page 1 / 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="nextPageButton">
+       <property name="text">
+        <string>Suivant</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

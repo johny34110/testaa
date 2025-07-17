@@ -1,0 +1,28 @@
+[
+  {
+    "nom": "celerite",
+    "type": "casque",
+    "niveau": 15,
+    "stat_principale": "Attaque",
+    "valeur_principale": 330,
+    "sous_stats": [
+      {
+        "stat": "Vitesse",
+        "valeur": 15.0
+      }
+    ]
+  },
+  {
+    "nom": "etherpeste",
+    "type": "casque",
+    "niveau": 15,
+    "stat_principale": "Attaque",
+    "valeur_principale": 330,
+    "sous_stats": [
+      {
+        "stat": "Vitesse",
+        "valeur": 13.0
+      }
+    ]
+  }
+]

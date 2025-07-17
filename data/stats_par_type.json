@@ -1,0 +1,17 @@
+{
+  "casque": {
+    "main_stat": "Attaque",
+    "par_niveau": {
+      "15": 330
+    }
+  },
+  "transitor": {
+    "main_stat": "PV",
+    "par_niveau": {}
+  },
+  "bracelet": {
+    "main_stat": "Défense",
+    "par_niveau": {}
+  },
+  "noyau": {}
+}

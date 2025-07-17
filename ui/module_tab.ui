@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ModuleTab</class>
+ <widget class="QWidget" name="ModuleTab">
+  <layout class="QHBoxLayout" name="horizontalLayoutModules">
+    <!-- Colonne de gauche -->
+    <item>
+      <layout class="QVBoxLayout" name="verticalLayoutList">
+        <item>
+          <widget class="QListWidget" name="listIcons">
+            <property name="viewMode"><enum>QListView::IconMode</enum></property>
+            <property name="iconSize">
+              <size><width>48</width><height>48</height></size>
+            </property>
+            <property name="movement"><enum>QListView::Static</enum></property>
+            <property name="resizeMode"><enum>QListView::Adjust</enum></property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+
+    <!-- Formulaire au centre -->
+    <item>
+      <widget class="QGroupBox" name="groupBoxModuleForm">
+        <property name="title"><string>Formulaire Module</string></property>
+        <layout class="QVBoxLayout" name="verticalLayoutForm">
+
+          <!-- Nom -->
+          <item>
+            <layout class="QHBoxLayout" name="layoutName">
+              <item>
+                <widget class="QLabel" name="labelNomModule">
+                  <property name="text"><string>Nom du module :</string></property>
+                </widget>
+              </item>
+              <item>
+                <widget class="QLineEdit" name="lineEditNomModule"/>
+              </item>
+            </layout>
+          </item>
+
+          <!-- Type -->
+          <item>
+            <layout class="QHBoxLayout" name="layoutType">
+              <item>
+                <widget class="QLabel" name="labelType">
+                  <property name="text"><string>Type :</string></property>
+                </widget>
+              </item>
+              <item>
+                <widget class="QComboBox" name="comboTypeModule">
+                  <item><property name="text"><string>casque</string></property></item>
+                  <item><property name="text"><string>transitor</string></property></item>
+                  <item><property name="text"><string>bracelet</string></property></item>
+                  <item><property name="text"><string>noyau</string></property></item>
+                </widget>
+              </item>
+            </layout>
+          </item>
+
+          <!-- Niveau remplacé par QSpinBox -->
+          <item>
+            <layout class="QHBoxLayout" name="layoutNiveau">
+              <item>
+                <widget class="QLabel" name="labelNiveauModule">
+                  <property name="text"><string>Niveau :</string></property>
+                </widget>
+              </item>
+              <item>
+                <widget class="QSpinBox" name="spinBoxNiveauModule">
+                  <property name="minimum"><number>0</number></property>
+                  <property name="maximum"><number>99</number></property>
+                </widget>
+              </item>
+            </layout>
+          </item>
+
+          <!-- Stat principale -->
+          <item>
+            <layout class="QHBoxLayout" name="layoutStatPrincipale">
+              <item>
+                <widget class="QLabel" name="labelStatPrincipale">
+                  <property name="text"><string>Stat. principale :</string></property>
+                </widget>
+              </item>
+              <item>
+                <widget class="QLineEdit" name="lineEditStatPrincipale"/>
+              </item>
+            </layout>
+          </item>
+
+          <!-- Valeur -->
+          <item>
+            <layout class="QHBoxLayout" name="layoutValeurPrincipale">
+              <item>
+                <widget class="QLabel" name="labelValeurPrincipale">
+                  <property name="text"><string>Valeur :</string></property>
+                </widget>
+              </item>
+              <item>
+                <widget class="QSpinBox" name="spinBoxValeurPrincipale"/>
+              </item>
+            </layout>
+          </item>
+
+          <!-- Bouton Ajouter une sous-stat juste après Valeur -->
+          <item>
+            <widget class="QPushButton" name="buttonAddSubstat">
+              <property name="text"><string>Ajouter une sous-stat</string></property>
+            </widget>
+          </item>
+
+          <!-- Scroll des sous-stats -->
+          <item>
+            <widget class="QScrollArea" name="scrollAreaSubstats">
+              <property name="widgetResizable"><bool>true</bool></property>
+              <widget class="QWidget" name="substatsContainer">
+                <layout class="QVBoxLayout" name="verticalLayoutSubstats"/>
+              </widget>
+            </widget>
+          </item>
+
+          <!-- Bouton final -->
+          <item>
+            <layout class="QHBoxLayout" name="layoutActionsModule">
+              <item>
+                <spacer name="horizontalSpacer"><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer>
+              </item>
+              <item>
+                <widget class="QPushButton" name="buttonSaveModule">
+                  <property name="text"><string>Ajouter / Modifier</string></property>
+                </widget>
+              </item>
+            </layout>
+          </item>
+
+        </layout>
+      </widget>
+    </item>
+
+    <!-- Colonne droite : recherche + liste -->
+    <item>
+      <layout class="QVBoxLayout" name="verticalLayoutModulesList">
+        <item>
+          <widget class="QLineEdit" name="searchModuleBar">
+            <property name="placeholderText"><string>Rechercher un module...</string></property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QListWidget" name="moduleList">
+            <property name="selectionMode"><enum>QAbstractItemView::SingleSelection</enum></property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
