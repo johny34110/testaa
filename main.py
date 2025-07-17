@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication, QWidget
 
 from fonction.personnages.personnages_controller import PersonnagesController
 from fonction.modules.modules_controller import ModulesController
-
+#yo
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
