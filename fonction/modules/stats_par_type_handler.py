@@ -1,59 +1,3 @@
-'''
-Module: stats_par_type_handler.py
-
-📊 Système de stats_par_type.json – fonctionnement détaillé
-
-🎯 Objectif:
-Ce module gère la lecture, l'écriture et l'initialisation du fichier data/stats_par_type.json qui contient:
-  - Pour chaque type de module (casque, transitor, bracelet, noyau):
-    • La stat principale (main_stat) pour les types fixes.
-    • Le mapping "par_niveau" des valeurs associées à chaque niveau.
-  - Pour les noyaux, un mapping flexible de sous-stats principales selon le niveau.
-
-Fonctionnalités:
-  1. Initialisation automatique du fichier JSON s'il n'existe pas ou est vide.
-  2. Lecture des données existantes pour préremplir l'interface:
-     - casque, transitor, bracelet: stat et valeur fixe selon niveau.
-     - noyau: aucune stat forcée, l'utilisateur choisit.
-  3. Sauvegarde dynamique pour les noyaux:
-     - Si l'utilisateur crée un noyau avec une stat principale/niveau non présent,
-       on ajoute l'entrée dans le JSON pour usage futur.
-
-Structure attendue (exemple):
-{
-  "casque": {
-    "main_stat": "Attaque",
-    "par_niveau": {"12": 270, "15": 330}
-  },
-  "transitor": {
-    "main_stat": "PV",
-    "par_niveau": {"12": 2700, "15": 3300}
-  },
-  "bracelet": {
-    "main_stat": "Défense",
-    "par_niveau": {"12": 205, "15": 250}
-  },
-  "noyau": {
-    "Attaque %": {"12": 5, "15": 6},
-    "Défense %": {"12": 5, "15": 6},
-    ...
-  }
-}
-
-Usage:
-    handler = StatsParTypeHandler('data/stats_par_type.json')
-    # Obtenir stat principale
-    stat, valeur = handler.get_main_stat('casque', 12)
-    # Pour noyau: si absent, valeur par défaut None
-    stat, valeur = handler.get_main_stat('noyau', 13)
-
-    # Enregistrer dynamiquement une nouvelle statistique de noyau
-    handler.set_noyau_stat('Crit%', 14, 7)
-
-    # Sauvegarde du fichier JSON
-    handler.save()
-'''
-
 import json
 import os
 from typing import Tuple, Optional
@@ -121,3 +65,14 @@ class StatsParTypeHandler:
     def save(self):
         """Exporte la structure actuelle vers le fichier JSON."""
         self._save_json()
+
+    def get_stat_par_type(self, type_module: str, niveau: int) -> Optional[dict]:
+        """
+        Retourne un dictionnaire {'stat': ..., 'valeur': ...}
+        ou None si rien trouvé.
+        Cette méthode est utilisée pour l'autoremplissage.
+        """
+        stat, val = self.get_main_stat(type_module, niveau)
+        if stat is not None and val is not None:
+            return {"stat": stat, "valeur": val}
+        return None

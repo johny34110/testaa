@@ -13,13 +13,16 @@
      </property>
      <item><property name="text"><string>Personnages</string></property></item>
      <item><property name="text"><string>Modules</string></property></item>
+     <item><property name="text"><string>Shell</string></property></item>
      <item><property name="text"><string>Builds</string></property></item>
      <item><property name="text"><string>Export / Import</string></property></item>
     </widget>
    </item>
    <item>
     <widget class="QStackedWidget" name="mainStack">
-     <property name="currentIndex"><number>0</number></property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
 
      <!-- Onglet Personnages -->
      <widget class="QWidget" name="tabCharacters">
@@ -31,12 +34,19 @@
       <!-- Rempli dynamiquement par uic.loadUi(module_tab.ui, self.tabModules) -->
      </widget>
 
+     <!-- Onglet Shell -->
+     <widget class="QWidget" name="tabShell">
+      <!-- Rempli dynamiquement par uic.loadUi(shell_tab.ui, self.tabShell) -->
+     </widget>
+
      <!-- Onglet Builds -->
      <widget class="QWidget" name="tabBuilds">
       <layout class="QVBoxLayout" name="layoutBuilds">
        <item>
         <widget class="QLabel" name="labelBuildsPlaceholder">
-         <property name="text"><string>Module d'optimisation à venir...</string></property>
+         <property name="text">
+          <string>Module d'optimisation à venir...</string>
+         </property>
         </widget>
        </item>
       </layout>
@@ -47,7 +57,9 @@
       <layout class="QVBoxLayout" name="layoutExport">
        <item>
         <widget class="QLabel" name="labelExportPlaceholder">
-         <property name="text"><string>Options d'exportation et d'importation à venir...</string></property>
+         <property name="text">
+          <string>Options d'exportation et d'importation à venir...</string>
+         </property>
         </widget>
        </item>
       </layout>
