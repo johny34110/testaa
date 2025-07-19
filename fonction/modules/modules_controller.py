@@ -10,8 +10,8 @@ from .gestion_modules import ModuleManager, Module
 from .stats_par_type_handler import StatsParTypeHandler
 
 SUBSTATS = [
-    "Attaque", "Attaque %", "PV", "PV %", "Défense", "Défense %",
-    "Taux crit", "Dégâts crit", "Résistance", "Précision", "Vitesse"
+    "Attaque", "Attaque%", "PV", "PV%", "Defense", "Defense%",
+    "Taux crit", "Degats crit", "Resistance", "Precision", "Vitesse"
 ]
 
 class ModulesController:

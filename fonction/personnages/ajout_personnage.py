@@ -1,52 +1,43 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QDialog, QComboBox, QSpinBox, QLabel, QMessageBox
+from PyQt5.QtCore import pyqtSignal
 from pathlib import Path
 import json
 
 class AjoutPersonnageDialog(QDialog):
+    # signal émis à chaque changement de module/shell
+    modulesChanged = pyqtSignal(dict)
+
     def __init__(self, parent=None, modules_path=None, shells_path=None):
         super().__init__(parent)
-
-        # --- Calcul du chemin vers le .ui à partir de la racine du projet ---
-        # Si votre arborescence est :
-        # v4/
-        # ├── main.py
-        # ├── ui/
-        # │   └── ajout_personnage.ui
-        # └── fonction/
-        #     └── personnages/
-        #         └── ajout_personnage.py
-        #
-        # alors il faut remonter de 'fonction/personnages' jusqu'à 'v4',
-        # puis descendre dans 'ui'.
-        base_dir = Path(__file__).resolve().parent.parent.parent
-        ui_path  = base_dir / "ui" / "ajout_personnage.ui"
-
-        # Charge la fenêtre depuis le .ui
+        ui_path = Path(__file__).resolve().parent.parent.parent / "ui" / "ajout_personnage.ui"
         uic.loadUi(str(ui_path), self)
 
-        # === DEBUG : vérifier le bon .ui et la présence des QComboBox ===
-        print(f"[DEBUG] ui_path.exists()? {ui_path.exists()} -> {ui_path}")
-        combos = [w.objectName() for w in self.findChildren(QComboBox)]
-        print(f"[DEBUG] Combos trouvés : {combos}")
-        # =================================================================
+        # Connexion des combos au signal
+        for i in range(6):
+            combo = getattr(self, f"comboModule{i}", None)
+            if combo:
+                combo.currentIndexChanged.connect(self._emit_modules_changed)
+        if hasattr(self, "comboShell"):
+            self.comboShell.currentIndexChanged.connect(self._emit_modules_changed)
 
-        # Stockage des chemins JSON
+        # Stockage des chemins et chargement
         self.modules_path = modules_path
         self.shells_path  = shells_path
-
-        # Chargement des modules et shells
         self._load_modules_shells()
 
-        # Limites des valeurs
+        # Limites, boutons…
         self.spinBoxNiveau.setMaximum(50)
         for spin in self.findChildren(QSpinBox):
             if spin.objectName().startswith("spinBox") and "Niveau" not in spin.objectName():
                 spin.setMaximum(9999999)
-
-        # Connexion des boutons
         self.buttonValider.clicked.connect(self.on_valider)
         self.buttonAnnuler.clicked.connect(self.reject)
+
+    def _emit_modules_changed(self, *_):
+        """Émet le state courant du dialog pour MAJ live."""
+        self.modulesChanged.emit(self.get_data())
+
 
     def _load_modules_shells(self):
         from pathlib import Path
